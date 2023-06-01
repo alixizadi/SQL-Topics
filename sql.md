@@ -657,117 +657,100 @@ For example, the following query gives the 20 rows with 10 different values:
 >`SELECT price
 FROM   sales_order
 ORDER BY price;`
- 
-PRICE
-----------
-100
-100
-200
-200
-300
-300
-400
-400
-500
-500
-600
- 
-PRICE
-----------
-600
-700
-700
-800
-800
-900
-900
-1000
-1000
+
+Here is the provided data formatted as two separate tables in Markdown:
+
+Table 1:
+
+| PRICE |
+|-------|
+| 100   |
+| 100   |
+| 200   |
+| 200   |
+| 300   |
+| 300   |
+| 400   |
+| 400   |
+| 500   |
+| 500   |
+| 600   |
+
+Table 2:
+
+| PRICE |
+|-------|
+| 600   |
+| 700   |
+| 700   |
+| 800   |
+| 800   |
+| 900   |
+| 900   |
+| 1000  |
+| 1000  |
+
+These tables represent the given data with the column header "PRICE" and the corresponding values listed below.
  
 20 rows selected.
 
-52. CORR Analytic Query
+## 52. CORR Analytic Query
 The CORR analytic function is utilized to determine the coefficient of correlation. This query is also used to calculate the Pearson correlation coefficient. The function calculates the following on rows in the table with no null values. This query always returns the values between +1 and -1, which describe the following:
 
 Syntax: CORR(exp1, exp2) [ OVER (analytic_clause) ]
 
 Example
-1
-2
-3
-4
-5
-6
-7
-SELECT empid,
+
+>`SELECT empid,
        name,
        dno,
        salary,
        job,
        CORR(SYSDATE - joiningdate, salary) OVER () AS my_corr_val
-FROM   employee;
+FROM   employee;`
 
-53. NTILE Analytic Query
+## 53. NTILE Analytic Query
 The NTILE enables users to split a sequence set into a detailed number of relatively similar groups, or containers, rows sanctioning. If the number of rows in the collection is less than the number of containers defined, the number of containers will be decreased. The basic syntax is as displayed below:
 
-NTILE(exp) OVER ([ partition_clause ] order_by)
+>`NTILE(exp) OVER ([ partition_clause ] order_by)`
 
 Example
-1
-2
-3
-4
-5
-6
-SELECT empid,
+
+>`SELECT empid,
        name,
        dno,
        salary,
        NTILE(6) OVER (ORDER BY salary) AS container_no
-FROM   employee;
+FROM   employee;`
 
-54. VARIANCE, VAR_POP, and VAR_SAMP Query
-The VARIANCE, VAR_POP, and VAR_SAMP are aggregate functions. These are utilized to determine the variance, group variance, and sample variance of a collection of data individually. As aggregate queries or functions, they decrease the number of rows, therefore the expression “aggregate”. If the data isn’t arranged we change the total rows in the Employee table to a separate row with the aggregated values. For example, the following query is displaying the use of these functions:
+## 54. `VARIANCE`, `VAR_POP`, and `VAR_SAMP` Query
+The `VARIANCE`, `VAR_POP`, and `VAR_SAMP` are aggregate functions. These are utilized to determine the variance, group variance, and sample variance of a collection of data individually. As aggregate queries or functions, they decrease the number of rows, therefore the expression “aggregate”. If the data isn’t arranged we change the total rows in the Employee table to a separate row with the aggregated values. For example, the following query is displaying the use of these functions:
 
-1
-2
-3
-4
-5
-6
-7
-8
-SELECT VARIANCE(salary) AS var_salary,
+
+>`SELECT VARIANCE(salary) AS var_salary,
        VAR_POP(salary) AS pop_salary,
        VAR_SAMP(salary) AS samp_salary
-FROM   employee;
+FROM   employee;`
  
 VAR_SALARY   POP_SALARY   SAMP_SALARY
 ------------ ----------- ------------
 1479414.97  1588574.81   1388717.27
 
-55. STDDEV, STDDEV_POP, and STDDEV_SAMP Queries
+## 55. `STDDEV`, `STDDEV_POP`, and `STDDEV_SAMP` Queries
 The STDDEV, STDDEV_POP, and STDDEV_SAMP aggregate queries or functions are applied to determine the standard deviation, population standard deviation, and cumulative sample standard deviation individually. As aggregate queries, they decrease the number of rows, therefore the expression “aggregate”. If the data isn’t arranged we convert all the rows in the EMPLOYEE table to a separate row. For example, the following query is displaying the use of all these functions.
 
-1
-2
-3
-4
-5
-6
-7
-8
-SELECT STDDEV(salary) AS stddev_salary,
+
+>`SELECT STDDEV(salary) AS stddev_salary,
        STDDEV_POP(salary) AS pop_salary,
        STDDEV_SAMP(salary) AS samp_salary
-FROM   employee;
+FROM   employee;`
  
 STDDEV_SALARY POP_SALARY SAMP_SALARY
 ---------- -------------- ---------------
 1193.50     1159.588      1193.603
 If there is more than one account after dropping nulls, the STDDEV function gives the result of the STDDEV_SAMP. Using an empty OVER clause converts the STDDEV query result into an analytic query. The absence of a partitioning indicates the entire output set is interpreted as a particular partition, so we accept the standard deviation of the salary and the primary data.
 
-56. Pattern Matching
+## 56. Pattern Matching
 The pattern matching syntax adds various alternatives. Data must be treated precisely and in a proper form. The PARTITION BY and ORDER BY conditions of all SQL analytic queries is applied to split the data into accumulations and within each group. If no partitions are specified, it is considered the entire sequence set is one huge partition.
 
 For example,
@@ -787,61 +770,46 @@ The MEASURES clause specifies the column result that will be provided for each m
   DOWN AS DOWN.products_sold < PREV(DOWN.products_sold)`
 
 ## 57. FIRST_VALUE
-The simplest way to get analytic functions is to begin by studying aggregate functions. An aggregate function collects or gathers data from numerous rows into a unique result row. For instance, users might apply the AVG function to get an average of all the salaries in the EMPLOYEE table. Let’s take a look at how First_Value can be used. The primary explanation for the FIRST_VALUE analytic function is displayed below.
+The simplest way to get analytic functions is to begin by studying aggregate functions. An aggregate function collects or gathers data from numerous rows into a unique result row. For instance, users might apply the AVG function to get an average of all the salaries in the EMPLOYEE table. Let’s take a look at how First_Value can be used. The primary explanation for the `FIRST_VALUE` analytic function is displayed below.
 
 Syntax:
-1
-2
-3
-4
-5
-FIRST_VALUE 
+
+>`FIRST_VALUE 
   { (expr) [NULLS ]
   | (expr [NULLS ])
   }
-  OVER (analytic clause)
+  OVER (analytic clause)`
+
 Example
-1
-2
-3
-4
-5
-6
-SELECT eno,
+
+>`SELECT eno,
        dno,
        salary,
        FIRST_VALUE(salary) IGNORE NULLS 
          OVER (PARTITION BY dno ORDER BY salary) AS lowest_salary_in_dept
-FROM   employee;
+FROM   employee;`
+
 The above query will ignore null values.
 
 <br/><br/>
 
 ## 58. LAST_VALUE
-The primary explanation for the LAST_VALUE analytic query or function is displayed below.
+The primary explanation for the `LAST_VALUE` analytic query or function is displayed below.
 
-1
-2
-3
-4
-Syntax: LAST_VALUE
+
+>`Syntax: LAST_VALUE
   { (expr) [ { NULLS ]
   | (expr [ NULLS ])
-  OVER (analytic clause)
-The LAST_VALUE analytic query is related to the LAST analytic function. The function enables users to get the last output from an organized column. Applying the default windowing to the output can be surprising. For example,
+  OVER (analytic clause)`
 
-1
-2
-3
-4
-5
-6
-SELECT eno,
+The `LAST_VALUE` analytic query is related to the `LAST` analytic function. The function enables users to get the last output from an organized column. Applying the default windowing to the output can be surprising. For example,
+
+>`SELECT eno,
        dno,
        salary,
        LAST_VALUE(salary) IGNORE NULLS
          OVER (PARTITION BY dno ORDER BY salary) AS highest_salary_in_dept
-FROM   employee;
+FROM   employee;`
 
 <br/><br/>
 
@@ -911,15 +879,16 @@ AS
 (
 SELECT empId, BossId, FirstName, LastName
 FROM Emp
-WHERE BossId is NULL
- 
-UNION ALL
- 
-SELECT e.empId, e.BossId, e.FirstName, e.LastName
+WHERE BossId is NULL`
+>
+>`UNION ALL`
+>
+>`SELECT e.empId, e.BossId, e.FirstName, e.LastName
 FROM Emp e INNER JOIN all_emp r
 ON e.BossId = r.Id
-)
-SELECT * FROM all_emp`
+)`
+>
+>`SELECT * FROM all_emp`
 
 <br/><br/>
 
@@ -987,7 +956,7 @@ FROM my_media_table;`
 <br/><br/>
 
 ## 68. DUMP
-DUMP is one of the important string/char functions. It is utilized to get a VARCHAR2 value. The value delivered defines the data type code. The following query is displaying its use:
+`DUMP` is one of the important string/char functions. It is utilized to get a `VARCHAR2` value. The value delivered defines the data type code. The following query is displaying its use:
 
 Example
 
@@ -997,7 +966,7 @@ FROM DUAL;`
 <br/><br/>
 
 ## 69. PATH
-PATH is applied simply with the UNDER_PATH and EQUALS_PATH requirements. It gives the corresponding path that points to the resource defined in the main state. The following query is displaying its use:
+`PATH` is applied simply with the `UNDER_PATH` and `EQUALS_PATH` requirements. It gives the corresponding path that points to the resource defined in the main state. The following query is displaying its use:
 
 Example
 
@@ -1008,7 +977,7 @@ WHERE EQUALS_PATH(res, '/sys/schemas/OE/www.pqr.com')=3;`
 
 ## 70. UNISTR
 
-UNISTR accepts an expression that determines character data and delivers it in the general character set. It gives support to the Unicode string literals by allowing users to define the Unicode value. The following query is displaying its use:
+`UNISTR` accepts an expression that determines character data and delivers it in the general character set. It gives support to the Unicode string literals by allowing users to define the Unicode value. The following query is displaying its use:
 
 Example
 
