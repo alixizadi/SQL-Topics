@@ -315,7 +315,7 @@ Although most databases are created using a UI such as Access or OpenOffice, it 
 <br/><br/>
 
 ## 33. Modifying and Deleting Tables with SQL
-The ALTER statement is used to modify or change the meaning of a table. In the case of the relational tables with columns, ALTER statement is used to update the table to the new or modified rules or definition. Alter belongs to the DDL category of Commands. Data definition language can be described as a pattern for commands through which data structures are represented.
+The `ALTER` statement is used to modify or change the meaning of a table. In the case of the relational tables with columns, `ALTER` statement is used to update the table to the new or modified rules or definition. Alter belongs to the DDL category of Commands. Data definition language can be described as a pattern for commands through which data structures are represented.
 
 Imagine that you decide to send a birthday card to your customers to show your appreciation for their business, and so you want to add a birthday field to the Customers table. In these SQL examples, you see how easy it is to modify existing tables with the ALTER statement:
 
@@ -757,7 +757,7 @@ VAR_SALARY   POP_SALARY   SAMP_SALARY
 
 
 ## 55. `STDDEV`, `STDDEV_POP`, and `STDDEV_SAMP` Queries
-The STDDEV, STDDEV_POP, and STDDEV_SAMP aggregate queries or functions are applied to determine the standard deviation, population standard deviation, and cumulative sample standard deviation individually. As aggregate queries, they decrease the number of rows, therefore the expression “aggregate”. If the data isn’t arranged we convert all the rows in the EMPLOYEE table to a separate row. For example, the following query is displaying the use of all these functions.
+The `STDDEV`, `STDDEV_POP`, and `STDDEV_SAMP` aggregate queries or functions are applied to determine the standard deviation, population standard deviation, and cumulative sample standard deviation individually. As aggregate queries, they decrease the number of rows, therefore the expression “aggregate”. If the data isn’t arranged we convert all the rows in the EMPLOYEE table to a separate row. For example, the following query is displaying the use of all these functions.
 
 
 >`SELECT STDDEV(salary) AS stddev_salary,
@@ -765,10 +765,13 @@ The STDDEV, STDDEV_POP, and STDDEV_SAMP aggregate queries or functions are appli
        STDDEV_SAMP(salary) AS samp_salary
 FROM   employee;`
  
-STDDEV_SALARY POP_SALARY SAMP_SALARY
----------- -------------- ---------------
-1193.50     1159.588      1193.603
-If there is more than one account after dropping nulls, the STDDEV function gives the result of the STDDEV_SAMP. Using an empty OVER clause converts the STDDEV query result into an analytic query. The absence of a partitioning indicates the entire output set is interpreted as a particular partition, so we accept the standard deviation of the salary and the primary data.
+
+| STDDEV_SALARY | POP_SALARY | SAMP_SALARY |
+|---------------|------------|-------------|
+| 1193.50       | 1159.588   | 1193.603    |
+
+
+If there is more than one account after dropping nulls, the `STDDEV` function gives the result of the `STDDEV_SAMP`. Using an empty OVER clause converts the `STDDEV` query result into an analytic query. The absence of a partitioning indicates the entire output set is interpreted as a particular partition, so we accept the standard deviation of the salary and the primary data.
 
 <br/><br/>
 
@@ -806,12 +809,11 @@ Syntax:
 
 Example
 
->`SELECT eno,
-       dno,
-       salary,
-       FIRST_VALUE(salary) IGNORE NULLS 
-         OVER (PARTITION BY dno ORDER BY salary) AS lowest_salary_in_dept
-FROM   employee;`
+>`SELECT eno, dno, salary, FIRST_VALUE(salary) IGNORE NULLS `
+>
+>`    OVER (PARTITION BY dno ORDER BY salary) AS lowest_salary_in_dept`
+>
+>`FROM   employee;`
 
 The above query will ignore null values.
 
@@ -862,22 +864,23 @@ CLUSTER_SET can get the data in one of the couple steps: It can use a mining typ
 This example enumerates the properties that have the biggest influence on cluster distribution for client ID 1000. The query requests the CLUSTER_DETAILS and CLUSTER_SET functions, which use the clustering model my_sample.
 
 Example
-1
-2
-3
-4
-5
-6
-7
-8
-SELECT S.cluster_id, prob,
-       CLUSTER_DETAILS(my_sample, S.cluster_id, 7 USING T.*) kset
-FROM
-  (SELECT v.*, CLUSTER_SET(my_sample, USING *) nset
-    FROM mining_data
-   WHERE client_id = 1000) T,
-  TABLE(T.nset) Q
-ORDER BY 2 DESC;  
+
+>`SELECT S.cluster_id, prob,`
+>
+>`       CLUSTER_DETAILS(my_sample, S.cluster_id, 7 USING T.*) kset`
+>
+>`FROM `
+>
+>`(SELECT v.*, CLUSTER_SET(my_sample, USING *) nset`
+>
+>`FROM mining_data`
+>
+>`WHERE client_id = 1000) T,`
+>
+>`TABLE(T.nset) Q`
+>
+>`ORDER BY 2 DESC;`
+
 A cluster is a group table that distributes the corresponding data blocks i.e. all the tables are actually put together. For example, EMPLOYEE and DEPARTMENT tables are connected to the DNO column. If you cluster them, it will actually store all rows in the same data blocks.
 
 .. and TEN More Advanced SQL Queries for our Users!
@@ -1062,15 +1065,21 @@ Some more common database queries you will need are:
 
 1)    The Maximum Value for a Column.
 
-SELECT MAX(column_name) FROM table_name
+>`SELECT MAX(column_name) FROM table_name`
+
 2)    The Minimum Value for a Column.
 
-SELECT MIN(column_name) FROM table_name
+>`SELECT MIN(column_name) FROM table_name`
+
 3)    The Count of Rows in a Table.
 
-SELECT COUNT(*) FROM table_name;
-DBMS Queries with Examples
-DBMS stands for DataBase Management System. Following are some DBMS queries with examples; these are very important for developers and database admins alike.
+>`SELECT COUNT(*) FROM table_name;`
+
+<br/><br/>
+## DBMS Queries with Examples
+
+- DBMS stands for DataBase Management System. Following are some DBMS queries with examples;
+-  these are very important for developers and database admins alike.
 
 1. The List of Values for a Column.
 
