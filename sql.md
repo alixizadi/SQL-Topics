@@ -956,37 +956,33 @@ This function is used to deliver the hyperbolic cosine of a number. It accepts a
 <br/><br/>
 
 ## 65. SOUNDEX
-The SOUNDEX function delivers a character string comprising the description of char. It allows users to match words that are spelled antagonistically, but sound similar in English. It does not support CLOB. The following query is displaying its use:
+The `SOUNDEX` function delivers a character string comprising the description of char. It allows users to match words that are spelled antagonistically, but sound similar in English. It does not support `CLOB`. The following query is displaying its use:
 
 Example
-1
-2
-3
-4
-SELECT last_name, first_name
+
+>`SELECT last_name, first_name
 FROM hr.emp
 WHERE SOUNDEX(last_name)
-= SOUNDEX('SCOTTY');
+= SOUNDEX('SCOTTY');`
 
 <br/><br/>
 
 ## 66. TZ_OFFSET
-The TZ_OFFSET gives the time zone offset identical to the case based on the date the statement is given. The following query is displaying its use:
+The `TZ_OFFSET` gives the time zone offset identical to the case based on the date the statement is given. The following query is displaying its use:
 
 Example
-1
-SELECT TZ_OFFSET('US/Eastern') FROM DUAL;
+
+>`SELECT TZ_OFFSET('US/Eastern') FROM DUAL;`
 
 <br/><br/>
 
 ## 67. CARDINALITY
-CARDINALITY is utilized to obtain the number of components in a nested table. It is supported in different versions. The following query is displaying its use:
+`CARDINALITY` is utilized to obtain the number of components in a nested table. It is supported in different versions. The following query is displaying its use:
 
 Example
-1
-2
-SELECT product_id, CARDINALITY(ad_mydocs_get)
-FROM my_media_table;
+
+>`SELECT product_id, CARDINALITY(ad_mydocs_get)
+FROM my_media_table;`
 
 <br/><br/>
 
@@ -994,10 +990,9 @@ FROM my_media_table;
 DUMP is one of the important string/char functions. It is utilized to get a VARCHAR2 value. The value delivered defines the data type code. The following query is displaying its use:
 
 Example
-1
-2
-SELECT DUMP('pqr', 1033)
-FROM DUAL;
+
+>`SELECT DUMP('pqr', 1033)
+FROM DUAL;`
 
 <br/><br/>
 
@@ -1005,20 +1000,23 @@ FROM DUAL;
 PATH is applied simply with the UNDER_PATH and EQUALS_PATH requirements. It gives the corresponding path that points to the resource defined in the main state. The following query is displaying its use:
 
 Example
-1
-2
-SELECT ANY_PATH FROM RESOURCE_VIEW
-WHERE EQUALS_PATH(res, '/sys/schemas/OE/www.pqr.com')=3;
+
+>`SELECT ANY_PATH FROM RESOURCE_VIEW
+WHERE EQUALS_PATH(res, '/sys/schemas/OE/www.pqr.com')=3;`
 
 <br/><br/>
 
 ## 70. UNISTR
+
 UNISTR accepts an expression that determines character data and delivers it in the general character set. It gives support to the Unicode string literals by allowing users to define the Unicode value. The following query is displaying its use:
 
 Example
-1
-SELECT UNISTR('pqr\00e4\00f3\00f9') FROM DUAL;
+
+>`SELECT UNISTR('pqr\00e4\00f3\00f9') FROM DUAL;`
  
+<br/><br/>
+
+## MOST Common Queries
 
 Database Queries in SQL
 These are some of the commonly used database queries in SQL.
