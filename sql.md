@@ -1,3 +1,5 @@
+
+- Source of queries: https://bytescout.com/blog/20-important-sql-queries.html
 ## 1.   SQL Query for Retrieving Tables
 This query can be run to retrieve the list of tables present in a database where the database is “My_Schema”.
 
@@ -508,6 +510,8 @@ union`
 
 The above SQL query will give you the last eight records from the employee table where rownum is a pseudo column. It indexes the data in an output set.
 
+<br/><br/>
+
 ## 46. LAG
 The LAG is applied to get data from a prior row. This is an analytical function. For example, the following query gives the salary from the prior row to compute the difference between the salary of the current row and that of the prior row. In this query, the ORDER BY of the LAG function is applied. The default is 1 if you do not define offset. The arbitrary default condition is given if the offset moves past the range of the window. The default is null if you do not define default.
 
@@ -574,6 +578,7 @@ FROM   employee;`
 | 7902 | FORD    | ANALYST  | 3000   | 5000        | 2000        |
 | 7839 | KING    | PRESIDENT | 5000   | 0           | -5000       |
 
+<br/><br/>
 
 ## 48. PERCENT_RANK
 The PERCENT_RANK analytic query. The ORDER BY clause is necessary for this query. Excluding a partitioning clause from the OVER clause determines the entire output set is interpreted as a separate partition. The first row of the standardized set is indicated 0 and the last row of the set is indicated 1. For example, the SQL query example gives the following output.
@@ -595,6 +600,7 @@ Output
 | 1     | 22623.5     | 0            |
 | 2     | 223927.08   | 1            |
 
+<br/><br/>
 
 ## 49. MIN
 Utilizing a blank OVER clause converts the MIN into an analytic function. This is also an analytical query. In this, the entire result set is interpreted as a single partition. It gives you the minimum salary for all employees and their original data. For example, the following query is displaying the use of MIN in the Select query.
@@ -625,6 +631,7 @@ FROM   employee;`
 | 7698 | BLAKE   | 30   | 2850   | 950        |
 | 7654 | MARTIN  | 30   | 1250   | 950        |
 
+<br/><br/>
 
 ## 50. MAX
 Using a blank row OVER clause converts the MAX into an analytic function. The lack of a partitioning clause indicates the entire output set is interpreted as a separate partition. This gives the maximum salary for all employees and their original data. For example, the following query displays the use of MAX in the select query.
@@ -654,6 +661,7 @@ FROM   employee;`
 | 7902 | FORD    | 20   | 3000   | 3000       |
 | 7934 | MILLER  | 10   | 1300   | 3000       |
 
+<br/><br/>
 
 ## 51. Top- N queries
 Top-N queries give a process for restricting the number of rows delivered from organized assemblages of data. They are remarkably beneficial when users want to give the top or bottom number of rows from a table.
@@ -663,8 +671,6 @@ For example, the following query gives the 20 rows with 10 different values:
 >`SELECT price
 FROM   sales_order
 ORDER BY price;`
-
-Here is the provided data formatted as two separate tables in Markdown:
 
 Table 1:
 
@@ -696,9 +702,8 @@ Table 2:
 | 1000  |
 | 1000  |
 
-These tables represent the given data with the column header "PRICE" and the corresponding values listed below.
- 
-20 rows selected.
+
+<br/><br/>
 
 ## 52. CORR Analytic Query
 The CORR analytic function is utilized to determine the coefficient of correlation. This query is also used to calculate the Pearson correlation coefficient. The function calculates the following on rows in the table with no null values. This query always returns the values between +1 and -1, which describe the following:
@@ -715,6 +720,9 @@ Example
        CORR(SYSDATE - joiningdate, salary) OVER () AS my_corr_val
 FROM   employee;`
 
+<br/><br/>
+
+
 ## 53. NTILE Analytic Query
 The NTILE enables users to split a sequence set into a detailed number of relatively similar groups, or containers, rows sanctioning. If the number of rows in the collection is less than the number of containers defined, the number of containers will be decreased. The basic syntax is as displayed below:
 
@@ -729,6 +737,8 @@ Example
        NTILE(6) OVER (ORDER BY salary) AS container_no
 FROM   employee;`
 
+<br/><br/>
+
 ## 54. `VARIANCE`, `VAR_POP`, and `VAR_SAMP` Query
 The `VARIANCE`, `VAR_POP`, and `VAR_SAMP` are aggregate functions. These are utilized to determine the variance, group variance, and sample variance of a collection of data individually. As aggregate queries or functions, they decrease the number of rows, therefore the expression “aggregate”. If the data isn’t arranged we change the total rows in the Employee table to a separate row with the aggregated values. For example, the following query is displaying the use of these functions:
 
@@ -741,6 +751,9 @@ FROM   employee;`
 VAR_SALARY   POP_SALARY   SAMP_SALARY
 ------------ ----------- ------------
 1479414.97  1588574.81   1388717.27
+
+<br/><br/>
+
 
 ## 55. `STDDEV`, `STDDEV_POP`, and `STDDEV_SAMP` Queries
 The STDDEV, STDDEV_POP, and STDDEV_SAMP aggregate queries or functions are applied to determine the standard deviation, population standard deviation, and cumulative sample standard deviation individually. As aggregate queries, they decrease the number of rows, therefore the expression “aggregate”. If the data isn’t arranged we convert all the rows in the EMPLOYEE table to a separate row. For example, the following query is displaying the use of all these functions.
@@ -755,6 +768,8 @@ STDDEV_SALARY POP_SALARY SAMP_SALARY
 ---------- -------------- ---------------
 1193.50     1159.588      1193.603
 If there is more than one account after dropping nulls, the STDDEV function gives the result of the STDDEV_SAMP. Using an empty OVER clause converts the STDDEV query result into an analytic query. The absence of a partitioning indicates the entire output set is interpreted as a particular partition, so we accept the standard deviation of the salary and the primary data.
+
+<br/><br/>
 
 ## 56. Pattern Matching
 The pattern matching syntax adds various alternatives. Data must be treated precisely and in a proper form. The PARTITION BY and ORDER BY conditions of all SQL analytic queries is applied to split the data into accumulations and within each group. If no partitions are specified, it is considered the entire sequence set is one huge partition.
@@ -774,6 +789,8 @@ The MEASURES clause specifies the column result that will be provided for each m
   UP AS UP.products_sold > PREV(UP.products_sold),
   FLAT AS FLAT.products_sold = PREV(FLAT.products_sold),
   DOWN AS DOWN.products_sold < PREV(DOWN.products_sold)`
+
+<br/><br/>
 
 ## 57. FIRST_VALUE
 The simplest way to get analytic functions is to begin by studying aggregate functions. An aggregate function collects or gathers data from numerous rows into a unique result row. For instance, users might apply the AVG function to get an average of all the salaries in the EMPLOYEE table. Let’s take a look at how First_Value can be used. The primary explanation for the `FIRST_VALUE` analytic function is displayed below.
