@@ -589,10 +589,12 @@ The PERCENT_RANK analytic query. The ORDER BY clause is necessary for this query
 
 Output
 
-PRDID        SUM(AMOUNT)  PERCENT_RANK
------------ ----------- ------------
-          1    22623.5            0
-          2   223927.08           1
+
+| PRDID | SUM(AMOUNT) | PERCENT_RANK |
+|-------|-------------|--------------|
+| 1     | 22623.5     | 0            |
+| 2     | 223927.08   | 1            |
+
 
 ## 49. MIN
 Utilizing a blank OVER clause converts the MIN into an analytic function. This is also an analytical query. In this, the entire result set is interpreted as a single partition. It gives you the minimum salary for all employees and their original data. For example, the following query is displaying the use of MIN in the Select query.
@@ -605,22 +607,24 @@ Utilizing a blank OVER clause converts the MIN into an analytic function. This i
        MIN(salary) OVER (PARTITION BY dtno) AS min_result
 FROM   employee;`
  
-     ENO   EMPNAME          DTNO     SALARY MIN_RESULT
----------- ---------- ---------- ---------- ---------------
-      7782 CLARK              10       2450            1300
-      7839 KING               10       5000            1300
-      7934 MILLER             10       1300            1300
-      7566 JONES              20       2975             800
-      7902 FORD               20       3000             800
-      7876 ADAMS              20       1100             800
-      7369 SMITH              20        800             800
-      7788 SCOTT              20       3000             800
-      7521 WARD               30       1250             950
-      7844 TURNER             30       1500             950
-      7499 ALLEN              30       1600             950
-      7900 JAMES              30        950             950
-      7698 BLAKE              30       2850             950
-      7654 MARTIN             30       1250             950
+
+| ENO  | EMPNAME | DTNO | SALARY | MIN_RESULT |
+|------|---------|------|--------|------------|
+| 7782 | CLARK   | 10   | 2450   | 1300       |
+| 7839 | KING    | 10   | 5000   | 1300       |
+| 7934 | MILLER  | 10   | 1300   | 1300       |
+| 7566 | JONES   | 20   | 2975   | 800        |
+| 7902 | FORD    | 20   | 3000   | 800        |
+| 7876 | ADAMS   | 20   | 1100   | 800        |
+| 7369 | SMITH   | 20   | 800    | 800        |
+| 7788 | SCOTT   | 20   | 3000   | 800        |
+| 7521 | WARD    | 30   | 1250   | 950        |
+| 7844 | TURNER  | 30   | 1500   | 950        |
+| 7499 | ALLEN   | 30   | 1600   | 950        |
+| 7900 | JAMES   | 30   | 950    | 950        |
+| 7698 | BLAKE   | 30   | 2850   | 950        |
+| 7654 | MARTIN  | 30   | 1250   | 950        |
+
 
 ## 50. MAX
 Using a blank row OVER clause converts the MAX into an analytic function. The lack of a partitioning clause indicates the entire output set is interpreted as a separate partition. This gives the maximum salary for all employees and their original data. For example, the following query displays the use of MAX in the select query.
@@ -632,22 +636,24 @@ Using a blank row OVER clause converts the MAX into an analytic function. The la
        MAX(salary) OVER () AS max_result
 FROM   employee;`
  
-     ENO   EMPNAME          DTNO       SALARY    MAX_RESULT
----------- ---------- ---------- ---------- ----------
-      7369 SMITH              20        800       3000
-      7499 ALLEN              30       1600       3000
-      7521 WARD               30       1250       3000
-      7566 JONES              20       2975       3000
-      7654 MARTIN             30       1250       3000
-      7698 BLAKE              30       2850       3000
-      7782 CLARK              10       2450       3000
-      7788 SCOTT              20       3000       3000
-      7839 KING               10       5000       3000
-      7844 TURNER             30       1500       3000
-      7876 ADAMS              20       1100       3000
-      7900 JAMES              30        950       3000
-      7902 FORD               20       3000       3000
-      7934 MILLER             10       1300       3000
+
+| ENO  | EMPNAME | DTNO | SALARY | MAX_RESULT |
+|------|---------|------|--------|------------|
+| 7369 | SMITH   | 20   | 800    | 3000       |
+| 7499 | ALLEN   | 30   | 1600   | 3000       |
+| 7521 | WARD    | 30   | 1250   | 3000       |
+| 7566 | JONES   | 20   | 2975   | 3000       |
+| 7654 | MARTIN  | 30   | 1250   | 3000       |
+| 7698 | BLAKE   | 30   | 2850   | 3000       |
+| 7782 | CLARK   | 10   | 2450   | 3000       |
+| 7788 | SCOTT   | 20   | 3000   | 3000       |
+| 7839 | KING    | 10   | 5000   | 3000       |
+| 7844 | TURNER  | 30   | 1500   | 3000       |
+| 7876 | ADAMS   | 20   | 1100   | 3000       |
+| 7900 | JAMES   | 30   | 950    | 3000       |
+| 7902 | FORD    | 20   | 3000   | 3000       |
+| 7934 | MILLER  | 10   | 1300   | 3000       |
+
 
 ## 51. Top- N queries
 Top-N queries give a process for restricting the number of rows delivered from organized assemblages of data. They are remarkably beneficial when users want to give the top or bottom number of rows from a table.
@@ -816,28 +822,19 @@ FROM   employee;`
 ## 59. Prediction
 The design sample foretells the gender and age of clients who are most expected to adopt an agreement card (target = 1). The PREDICTION function takes the price matrix correlated with the design and applies for marital status, and house size as predictors. The syntax of the PREDICTION function can also apply a piece of arbitrary GROUPING information when getting a partitioned model.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-SELECT client_gender, COUNT(*) AS ct, ROUND(AVG(age)) AS average_age
+
+>`SELECT client_gender, COUNT(*) AS ct, ROUND(AVG(age)) AS average_age
    FROM mining_data_shop
    WHERE PREDICTION(sample COST MODEL
       USING client_marital_status, house_size) = 1
    GROUP BY client_gender
-   ORDER BY client_gender;
+   ORDER BY client_gender;`
     
-CUST_GENDER         CNT    AVG_AGE
------------- ---------- ----------
-F                   270         40
-M                   585         41
+| CUST_GENDER | CNT | AVG_AGE |
+|-------------|-----|---------|
+| F           | 270 | 40      |
+| M           | 585 | 41      |
+
 
 <br/><br/>
 
