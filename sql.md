@@ -3,7 +3,7 @@
 ## 1.   SQL Query for Retrieving Tables
 This query can be run to retrieve the list of tables present in a database where the database is “My_Schema”.
 
-With the SELECT command, users can define the columns that they want to get in the query output. This command is also useful to get which column users want to see as the output table. The SELECT statement is applied to pick data from a table. The data retrieved is put in a result table, named the result set. The output data is saved in a result table. This output table is also termed the result set.
+With the `SELECT` command, users can define the columns that they want to get in the query output. This command is also useful to get which column users want to see as the output table. The `SELECT` statement is applied to pick data from a table. The data retrieved is put in a result table, named the result set. The output data is saved in a result table. This output table is also termed the result set.
 
 >`SELECT * FROM My_Schema.Tables;`
 
@@ -30,7 +30,7 @@ This SQL query retrieves the specified attributes from the table on the constrai
 
 ## 4. Query for Outputting Sorted Data Using `Order By`
 
-This query orders the results with respect to the attribute which is referenced using “Order By” – so for example, if that attribute is an integer data type, then the result would either be sorted in ascending or descending order; likewise, if the data type is a String then the result would be ordered in alphabetical order. The order by clause is used to sort the data from the table. The order by clause should always be used in the last of the SQL query.
+This query orders the results with respect to the attribute which is referenced using “`Order By`” – so for example, if that attribute is an integer data type, then the result would either be sorted in ascending or descending order; likewise, if the data type is a String then the result would be ordered in alphabetical order. The order by clause is used to sort the data from the table. The order by clause should always be used in the last of the SQL query.
 
 
 >`SELECT EMP_ID, LAST_NAME FROM EMPLOYEE
@@ -128,7 +128,7 @@ WHERE Discontinued = No;`
 <br/><br/>
 
 ## 13. Query for Dropping a View
-This query will drop or delete a view named ‘V1’. The important thing to remember here is that the DROP VIEW is disallowed if there are any views dependent on the view you are about to drop.
+This query will drop or delete a view named ‘V1’. The important thing to remember here is that the `DROP VIEW` is disallowed if there are any views dependent on the view you are about to drop.
 
 
 >`DROP VIEW V1;`
@@ -138,10 +138,11 @@ This query will drop or delete a view named ‘V1’. The important thing to rem
 ## 14. Query to Display User Tables
 A user-defined table is a representation of defined information in a table, and it can be used as arguments for procedures or user-defined functions. Because they’re so useful, it’s useful to keep track of them using the following query. User tables explain the relational tables of the current user.
 
-1
-SELECT * FROM Sys.objects WHERE Type='u'
+>`SELECT * FROM Sys.objects WHERE Type='u'`
 
-15. Query to Display Primary Keys
+<br/><br/>
+
+## 15. Query to Display Primary Keys
 A primary key uniquely identifies all values within a table. A primary key imposes a NOT NULL restriction and a unique constraint in one declaration. In other words, it prevents various rows from having similar values or sequences of columns. It doesn’t allow null values. The primary key can be defined as a single column or the combination of two columns in a table. It is responsible for all the relationships between the tables.
 
 The following SQL query lists all the fields in a table’s primary key.
