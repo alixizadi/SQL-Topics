@@ -154,60 +154,67 @@ A Unique Key allows a column to ensure that all of its values are different. A u
 
 >`SELECT * FROM Sys.Objects WHERE Type='uq'`
 
-17. Displaying Foreign Keys
+<br/><br/>
+
+## 17. Displaying Foreign Keys
 Foreign keys link one table to another – they are attributes in one table which refer to the primary key of another table.
 
-1
-SELECT * FROM Sys.Objects WHERE Type='f'
+>`SELECT * FROM Sys.Objects WHERE Type='f'`
+
 Primary, Unique, and Foreign are part of the constraints in SQL. Constraints are essential to the scalability, compliance, and sincerity of the data. Constraints implement particular rules, assuring the data adheres to the conditions outlined. For example, these are the laws imposed on the columns of the database tables. These are applied to restrict the kind of data in the table. This assures the efficiency and authenticity of the database.
 
-18. Displaying Triggers
+<br/><br/>
+
+## 18. Displaying Triggers
 A Trigger is sort of an ‘event listener’ – i.e, it’s a pre-specified set of instructions that execute when a certain event occurs. The list of defined triggers can be viewed using the following query.
 
-1
-SELECT * FROM Sys.Objects WHERE Type='tr'
+>`SELECT * FROM Sys.Objects WHERE Type='tr'`
 
-19. Displaying Internal Tables
+<br/><br/>
+
+## 19. Displaying Internal Tables
 Internal tables are formed as a by-product of a user action and are usually not accessible. The data in internal tables cannot be manipulated; however, the metadata of the internal tables can be viewed using the following query.
 
-1
-SELECT * FROM Sys.Objects WHERE Type='it'
+>`SELECT * FROM Sys.Objects WHERE Type='it'`
 
-20. Displaying a List of Procedures
+<br/><br/>
+
+## 20. Displaying a List of Procedures
 A stored procedure is a group of advanced SQL queries that logically form a single unit and perform a particular task. Thus, using the following query you can keep track of them:
 
-1
-SELECT * FROM Sys.Objects WHERE Type='p'
+>`SELECT * FROM Sys.Objects WHERE Type='p'`
  
 
-
-21. Swapping the Values of Two Columns in a table
-In this and subsequent examples, we will use a common company database including several tables that are easily visualized. Our practice DB will include a Customer table and an Order table. The Customers table will contain some obvious columns including ID, Name, Address, zip, and email, for example, where we assume for now that the primary key field for indexing is the Customer_ID field.
+## 21. Swapping the Values of Two Columns in a table
+In this and subsequent examples, we will use a common company database including several tables that are easily visualized. Our practice DB will include a Customer table and an Order table. The Customers table will contain some obvious columns including ID, Name, Address, zip, and email, for example, where we assume for now that the primary key field for indexing is the `Customer_ID` field.
 
 With this in mind, we can easily imagine an Orders table that likewise contains the indexed customer ID field, along with details of each order placed by the customer. This table will include the order Number, Quantity, Date, Item, and Price. In our first one of SQL examples, imagine a situation where the zip and phone fields were transposed and all the phone numbers were erroneously entered into the zip code field. We can easily fix this problem with the following SQL statement:
 
-1
-UPDATE Customers SET Zip=Phone, Phone=Zip
+>`UPDATE Customers SET Zip=Phone, Phone=Zip`
 
-22. Returning a Column of Unique Values
-Now, suppose that our data entry operator added the same Customers to the Customers table more than once by mistake. As you know, proper indexing requires that the key field contains only unique values. To fix the problem, we will use SELECT DISTINCT to create an indexable list of unique customers:
+<br/><br/>
 
-1
-SELECT DISTINCT ID FROM Customers
+## 22. Returning a Column of Unique Values
+Now, suppose that our data entry operator added the same Customers to the Customers table more than once by mistake. As you know, proper indexing requires that the key field contains only unique values. To fix the problem, we will use `SELECT DISTINCT` to create an indexable list of unique customers:
 
-23. Making a Top 25 with the SELECT TOP Clause
+
+>`SELECT DISTINCT ID FROM Customers`
+
+## 23. Making a Top 25 with the SELECT TOP Clause
 Next, imagine that our Customers table has grown to include thousands of records, but we just want to show a sample of 25 of these records to demonstrate the column headings and The SELECT TOP clause allows us to specify the number of records to return, like a Top-25 list. In this example we will return the top 25 from our Customers table:
 
-1
-SELECT TOP 25 FROM Customers WHERE Customer_ID<>NULL;
 
-24. Searching for SQL Tables with Wildcards
+>`SELECT TOP 25 FROM Customers WHERE Customer_ID<>NULL;`
+
+## 24. Searching for SQL Tables with Wildcards
 Wildcard characters or operators like “%” make it easy to find particular strings in a large table of thousands of records. Suppose we want to find all of our customers who have names beginning with “Herb” including Herberts, and Herbertson. The % wildcard symbol can be used to achieve such a result. The following SQL query will return all rows from the Customer table where the Customer_name field begins with “Herb”:
 
-1
-SELECT * From Customers WHERE Name LIKE 'Herb%'
 
-25. Between Monday and Tuesday
+>`SELECT * From Customers WHERE Name LIKE 'Herb%'`
+
+<br/><br/>
+
+## 25. Between Monday and Tuesday
 Today is Wednesday, and we arrive at work and discover that our new data entry clerk in training has entered all new orders incorrectly on Monday and Tuesday. We wish to teach our new trainee to find and correct all erroneous records. What’s the easiest way to get all the records from the Orders table entered on Monday and Tuesday? The Between clause makes the task a breeze:
 
 
@@ -218,495 +225,385 @@ Date BETWEEN ‘01/12/2018’ AND ‘01/13/2018’`
 Undoubtedly the whole reason that a relational database exists in the first place is to find matching records in two tables! The JOIN statement accomplishes this core objective of SQL and makes the task easy. Here we are going to fetch a list of all records which have matches in the Customers and Orders tables:
 
 
-`SELECT ID FROM Customers INNER
+>`SELECT ID FROM Customers INNER
 JOIN Orders ON Customers.ID = Orders.ID`
-The point of INNER JOIN, in this case, is to select records in the Customers table which have matching customer ID values in the Orders table and return only those records. Of course, there are many types of JOIN, such as FULL, SELF, and LEFT, but for now, let’s keep things interesting and move on to more diverse types of advanced SQL commands.
 
-27. Doubling the Power with UNION
-We can combine the results of two SQL query examples into one naturally with the UNION keyword. Suppose we want to create a new table by combining the Customer_name and phone from Customers with a list of that customer’s recent orders so that we can look for patterns and perhaps suggest future purchases. Here is a quick way to accomplish the task:
+The point of `INNER JOIN`, in this case, is to select records in the Customers table which have matching customer ID values in the Orders table and return only those records. Of course, there are many types of `JOIN`, such as `FULL`, `SELF`, and `LEFT`, but for now, let’s keep things interesting and move on to more diverse types of advanced SQL commands.
 
-1
-2
-SELECT phone FROM Customers 
-UNION SELECT item FROM Orders
-The UNION keyword makes it possible to combine JOINS and other criteria to achieve a very powerful new table generation potential.
+<br/><br/>
 
-28. Making Column Labels More Friendly
+## 27. Doubling the Power with UNION
+We can combine the results of two SQL query examples into one naturally with the `UNION` keyword. Suppose we want to create a new table by combining the `Customer_name` and phone from Customers with a list of that customer’s recent orders so that we can look for patterns and perhaps suggest future purchases. Here is a quick way to accomplish the task:
+
+
+>`SELECT phone FROM Customers 
+UNION SELECT item FROM Orders`
+
+The `UNION` keyword makes it possible to combine `JOINS` and other criteria to achieve a very powerful new table generation potential.
+
+<br/><br/>
+
+## 28. Making Column Labels More Friendly
 Aliasing column labels give us the convenience of renaming a column label to something more readable. There is a tradeoff when naming columns to make them succinct results in reduced readability in subsequent daily use. In our Orders table, the item column contains the description of purchased products. Let’s see how to alias the item column to temporarily rename it for greater user-friendliness:
 
-1
-SELECT Item AS item_description FROM Orders
 
-29. Always and Everywhere!
-Wouldn’t it be great if there were a set of conditions you could depend on every time? The complex SQL queries using ANY and ALL can make this ideal a reality! Let’s look at how the ALL keyword is used to include records only when a set of conditions is true for ALL records. In the following example, we will return records from the Orders table where the idea is to get a list of high volume orders for a given item, in this case for customers who ordered more than 50 of the product:
+>`SELECT Item AS item_description FROM Orders`
 
-1
-2
-3
-4
-SELECT Item FROM Orders 
+<br/><br/>
+
+
+## 29. Always and Everywhere!
+Wouldn’t it be great if there were a set of conditions you could depend on every time? The complex SQL queries using `ANY` and `ALL` can make this ideal a reality! Let’s look at how the `ALL` keyword is used to include records only when a set of conditions is true for `ALL` records. In the following example, we will return records from the Orders table where the idea is to get a list of high volume orders for a given item, in this case for customers who ordered more than 50 of the product:
+
+
+>`SELECT Item FROM Orders 
 WHERE id = ALL
 (SELECT ID FROM Orders
-WHERE quantity > 50)
+WHERE quantity > 50)`
 
-30. Writing Developer Friendly SQL
+<br/><br/>
+
+## 30. Writing Developer Friendly SQL
 An often overlooked but very important element of SQL scripting is adding comments to a script of queries to explain what it’s doing for the benefit of future developers who may need to revise and update your SQL queries.
 
 A SQL script is a collection of SQL elements and commands accumulated as a file in SQL Scripts. This script file can include many SQL commands or PL/SQL codes. One can utilize SQL Scripts to build, edit, design, execute, and delete files.
 
 The — single line and the /* .. */ multi-line delimiters empower us to add useful comments to scripts, but this is also used in another valuable way. Sometimes a section of code may not be in use, but we don’t want to delete it, because we anticipate using it again. Here we can simply add the comment delimiter to deactivate it momentarily:
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-/* This query below is commented so it won't execute*/
-/*
+>`/* This query below is commented so it won't execute*/`
+
+>`/*
 SELECT item FROM Orders 
 WHERE date ALL = (SELECT Order_ID FROM Orders
 WHERE quantity > 50)
-*/
- 
-/* the SQL query below the will be executed 
+*/`
+
+The SQL query below the will be executed 
 ignoring the text after "--"
-*/
- 
-SELECT item -- single comment  
+
+> `SELECT item -- single comment  
 FROM Orders -- another single comment
 WHERE id 
 ALL = (SELECT ID FROM Orders
-WHERE quantity > 25)
+WHERE quantity > 25)`
 
-31.  SQL queries for Database Management
+<br/><br/>
+
+## 31.  SQL queries for Database Management
 So far we have explored SQL query examples for querying tables and combining records from multiple queries. Now it’s time to take a step upward and look at the database on a structural level. Let’s start with the easiest SQL statement of all which creates a new database. Here, we are going to create the DB as a container for our Customers and Orders tables used in the previous ten examples above:
 
-1
-CREATE DATABASE AllSales
 
-32. Adding Tables to Our New DB
+>`CREATE DATABASE AllSales`
+
+<br/><br/>
+
+## 32. Adding Tables to Our New DB
 Next, we will actually add the Customers table which we’ve been using in previous examples, and then add some of the column labels which we are already familiar with:
 
-1
-2
-3
-4
-5
-6
-CREATE TABLE Customers (
+>`CREATE TABLE Customers (
 ID varchar(80),
 Name varchar(80),
 Phone varchar(20),
 ....
-);
+);`
+
 Although most databases are created using a UI such as Access or OpenOffice, it is important to know how to create and delete databases and tables programmatically via code with SQL statements. This is especially so when installing a new web app and the UI asks new users to enter names for DBs to be added during installation.
 
-33. Modifying and Deleting Tables with SQL
+<br/><br/>
+
+## 33. Modifying and Deleting Tables with SQL
 The ALTER statement is used to modify or change the meaning of a table. In the case of the relational tables with columns, ALTER statement is used to update the table to the new or modified rules or definition. Alter belongs to the DDL category of Commands. Data definition language can be described as a pattern for commands through which data structures are represented.
 
 Imagine that you decide to send a birthday card to your customers to show your appreciation for their business, and so you want to add a birthday field to the Customers table. In these SQL examples, you see how easy it is to modify existing tables with the ALTER statement:
 
-1
-ALTER TABLE Customers ADD Birthday varchar(80)
+
+>`ALTER TABLE Customers ADD Birthday varchar(80)`
+
 If a table becomes corrupted with bad data you can quickly delete it like this:
 
-1
-DROP TABLE table_name
+>`DROP TABLE table_name`
 
-34. The Key to Successful Indexing
+
+<br/><br/>
+
+## 34. The Key to Successful Indexing
 An index is a schema element that includes a record for each content that arrives in the indexed column of the database table or cluster and gives a high-speed path to rows. There are many types of indexes such as Bitmap indexes, Partitioned indexes, Function-based indexes, and Domain indexes.
 
-Accurate indexing requires that the Primary Key column contains only unique values for this purpose. This guarantees that JOIN statements will maintain integrity and produce valid matches. Let’s create our Customers table again and establish the ID column as the Primary Key:
+Accurate indexing requires that the Primary Key column contains only unique values for this purpose. This guarantees that `JOIN` statements will maintain integrity and produce valid matches. Let’s create our Customers table again and establish the ID column as the Primary Key:
 
-1
-2
-3
-4
-5
-CREATE TABLE Customers (
+>`CREATE TABLE Customers (
 ID int NOT NULL,
 Name varchar(80) NOT NULL,
 PRIMARY KEY (ID)
-);
-We can extend the functionality of the Primary Key so that it automatically increments from a base. Change the ID entry above to add the AUTO_INCREMENT keyword as in the following statement:
+);`
 
-1
-ID int NOT NULL AUTO_INCREMENT
+We can extend the functionality of the Primary Key so that it automatically increments from a base. Change the ID entry above to add the `AUTO_INCREMENT` keyword as in the following statement:
 
-35. Advanced Concepts For Improving Performance
+
+>`ID int NOT NULL AUTO_INCREMENT`
+
+<br/><br/>
+
+## 35. Advanced Concepts For Improving Performance
 Whenever practical, is always better to write the column name list into a SELECT statement rather than using the * delimiter as a wildcard to select all columns. SQL Server has to do a search and replace operation to find all the columns in your table and write them into the statement for you (every time the SELECT is executed). For example:
 
-1
-SELECT * FROM Customers
+
+>`SELECT * FROM Customers`
+
 Would actually execute much faster on our database as:
 
-1
-2
-SELECT Name, Birthday, Phone, 
-Address, Zip FROM Customers
-Performance pitfalls can be avoided in many ways. For example, avoid the time sinkhole of forcing SQL Server to check the system/master database every time by using only a stored procedure name, and never prefix it with SP_. Also setting NOCOUNT ON reduces the time required for SQL Server to count rows affected by INSERT, DELETE, and other commands. Using INNER JOIN with a condition is much faster than using WHERE clauses with conditions. We advise developers to learn SQL server queries to an advanced level for this purpose. For production purposes, these tips may be crucial to adequate performance. Notice that our tutorial examples tend to favor the INNER JOIN.
+>`SELECT Name, Birthday, Phone, 
+Address, Zip FROM Customers`
 
-36. Conditional Subquery Results
-The SQL operator EXISTS tests for the existence of records in a subquery and returns a value TRUE if a subquery returns one or more records. Have a look at this query with a subquery condition:
+Performance pitfalls can be avoided in many ways. For example, avoid the time sinkhole of forcing SQL Server to check the system/master database every time by using only a stored procedure name, and never prefix it with SP_. 
 
-1
-2
-3
-SELECT Name FROM Customers WHERE EXISTS 
+Also setting `NOCOUNT ON` reduces the time required for SQL Server to count rows affected by `INSERT`, `DELETE`, and other commands. Using `INNER JOIN` with a condition is much faster than using `WHERE` clauses with conditions. We advise developers to learn SQL server queries to an advanced level for this purpose. For production purposes, these tips may be crucial to adequate performance. Notice that our tutorial examples tend to favor the `INNER JOIN`.
+
+<br/><br/>
+
+## 36. Conditional Subquery Results
+The SQL operator `EXISTS` tests for the existence of records in a subquery and returns a value `TRUE` if a subquery returns one or more records. Have a look at this query with a subquery condition:
+
+
+>`SELECT Name FROM Customers WHERE EXISTS 
 (SELECT Item FROM Orders 
-WHERE Customers.ID = Orders.ID AND Price < 50)
-In this example above, the SELECT returns a value of TRUE when a customer has orders valued at less than $50.
+WHERE Customers.ID = Orders.ID AND Price < 50)`
 
-37. Copying Selections from Table to Table
+In this example above, the `SELECT` returns a value of TRUE when a customer has orders valued at less than $50.
+
+<br/><br/>
+
+## 37. Copying Selections from Table to Table
 There are a hundred and one uses for this SQL tool. Suppose you want to archive your yearly Orders table into a larger archive table. This next example shows how to do it.
 
-1
-2
-3
-INSERT INTO Yearly_Orders 
+
+>`INSERT INTO Yearly_Orders 
 SELECT * FROM Orders 
-WHERE Date<=1/1/2018
+WHERE Date<=1/1/2018`
+
 This example will add any records from the year 2018 to the archive.
 
-38. Catching NULL Results
+<br/><br/>
+
+## 38. Catching NULL Results
 The NULL is the terminology applied to describe an absent value. Null does not mean zero. A NULL value in a column of a table is a condition in a domain that seems to be empty. A column with a NULL value is a domain with an absent value. It is essential to recognize that a NULL value is distinct from a zero.
 
 In cases where NULL values are allowed in a field, calculations on those values will produce NULL results as well. This can be avoided by the use of the IFNULL operator. In this next example, a value of zero is returned rather than a value of NULL when the calculation encounters a field with a NULL value:
 
-1
-2
-3
-SELECT Item, Price * 
+>`SELECT Item, Price * 
 (QtyInStock + IFNULL(QtyOnOrder, 0)) 
-FROM Orders
+FROM Orders`
 
-39. HAVING can be Relieving!
+<br/><br/>
+
+## 39. HAVING can be Relieving!
 The problem was that the SQL WHERE clause could not operate on aggregate functions. The problem was solved by using the HAVING clause. As an example, this next query fetches a list of customers by the region where there is at least one customer per region:
 
-1
-2
-3
-4
-SELECT COUNT(ID), Region
+
+>`SELECT COUNT(ID), Region
 FROM Customers
 GROUP BY Region
-HAVING COUNT(ID) > 0;
+HAVING COUNT(ID) > 0;`
 
-40. Tie things up with Strings!
+<br/><br/>
+
+## 40. Tie things up with Strings!
 Let’s have a look at processing the contents of field data using functions. Substring is probably the most valuable of all built-in functions. It gives you some of the power of Regex, but it’s not so complicated as Regex. Suppose you want to find the substring left of the dots in a web address. Here’s how to do it with an SQL Select query:
 
-1
-SELECT SUBSTRING_INDEX("www.bytescout.com", ".", 2);
+
+>`SELECT SUBSTRING_INDEX("www.example.com", ".", 2);`
+
 This line will return everything to the left of the second occurrence of “. ” and so, in this case, it will return
 
-1
-<a href="https://bytescout.com">www.bytescout.com</a>
-Check this video to learn about every SQL query:
+<br/><br/>
 
+## 41. Use COALESCE to return the first non-null expression
+The SQL `Coalesce` is used to manage the `NULL` values of the database. In this method, the `NULL` values are substituted with the user-defined value. The SQL Coalesce function assesses the parameters in series and always delivers the first non-null value from the specified argument record.
 
+- Syntax:
 
- 
+>`SELECT COALESCE(NULL,NULL,'Example',NULL,'Byte')`
 
-.. and 20 more useful SQL Queries examples!!
+<br/><br/>
 
-41. Use COALESCE to return the first non-null expression
-The SQL Coalesce is used to manage the NULL values of the database. In this method, the NULL values are substituted with the user-defined value. The SQL Coalesce function assesses the parameters in series and always delivers the first non-null value from the specified argument record.
-
-Syntax
-1
-SELECT COALESCE(NULL,NULL,'ByteScout',NULL,'Byte')
-Output
-ByteScout
-
-42. Use Convert to transform any value into a particular datatype
+## 42. Use Convert to transform any value into a particular datatype
 This is used to convert a value into a defined datatype. For example, if you want to convert a particular value into int datatype then a convert function can be used to achieve this. For example,
 
-Syntax
-1
-SELECT CONVERT(int, 27.64)
-Output
-27
+- Syntax
 
-43. DENSE_RANK()Analytical query
-It is an analytic query that computes the rank of a row in an arranged collection of rows. An output rank is a number starting from 1. DENSE_RANK is one of the most important SQL queries. It returns rank preferences as sequential numbers. It does not jump rank in event of relations. For example, the following query will give the sequential ranks to the employee.
+>`SELECT CONVERT(int, 27.64)`
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-SELECT eno,
+>`Output: 27`
+
+<br/><br/>
+
+## 43. DENSE_RANK() Analytical query
+It is an analytic query that computes the rank of a row in an arranged collection of rows. An output rank is a number starting from 1. `DENSE_RANK` is one of the most important SQL queries. It returns rank preferences as sequential numbers. It does not jump rank in event of relations. For example, the following query will give the sequential ranks to the employee.
+
+>`SELECT eno,
 dno,
 salary,
 DENSE_RANK() OVER (PARTITION BY dno ORDER BY salary) AS ranking
-FROM employee;
- 
-ENO  DNO SALARY RANKING
----------- ---------- ---------- ----------
-7933  10 1500   1
-7788  10 2650   2
-7831  10 6000   3
-7362  20 900    1
-7870  20 1200   2
-7564  20 2575   3
-7784  20 4000   4
-7903  20 4000   4
-7901  30 550    1
-7655  30 1450   2
-7522  30 1450   2
-7844  30 1700   3
-7493  30 1500   4
-7698  30 2850   5
+FROM employee;`
 
-44. Query_partition_clause
+
+| ENO  | DNO | SALARY | RANKING |
+|------|-----|--------|---------|
+| 7933 | 10  | 1500   | 1       |
+| 7788 | 10  | 2650   | 2       |
+| 7831 | 10  | 6000   | 3       |
+| 7362 | 20  | 900    | 1       |
+| 7870 | 20  | 1200   | 2       |
+| 7564 | 20  | 2575   | 3       |
+| 7784 | 20  | 4000   | 4       |
+| 7903 | 20  | 4000   | 4       |
+| 7901 | 30  | 550    | 1       |
+| 7655 | 30  | 1450   | 2       |
+| 7522 | 30  | 1450   | 2       |
+| 7844 | 30  | 1700   | 3       |
+| 7493 | 30  | 1500   | 4       |
+| 7698 | 30  | 2850   | 5       |
+
+
+<br/><br/>
+
+## 44. Query_partition_clause
 The query_partition_clause breaks the output set into distributions, or collections, of data. The development of the analytic query is limited to the confines forced by these partitions, related to the process a GROUP BY clause modifies the performance of an aggregate function. If the query_partition_clause is eliminated, the entire output collection is interpreted as a separate partition.
 
 The following query applies an OVER clause, so the average displayed is based on all the records of the output set.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-SELECT eno, dno, salary,
+>`SELECT eno, dno, salary,
 AVG(salary) OVER () AS avg_sal
-FROM employee;
+FROM employee;`
  
-EO  DNO SALARY AVG_SAL
----------- ---------- ---------- ----------
-7364 20 900 2173.21428
-7494 30 1700 2173.21428
-7522 30 1350 2173.21428
-7567 20 3075 2173.21428
-7652 30 1350 2173.21428
-7699 30 2950 2173.21428
-7783 10 2550 2173.21428
-7789 20 3100 2173.21428
-7838 10 5100 2173.21428
-7845 30 1600 2173.21428
-7877 20 1200 2173.21428
-7901 30 1050 2173.21428
-7903 20 3100 2173.21428
-7935 10 1400 2173.21428
+| EO   | DNO | SALARY | AVG_SAL  |
+|------|-----|--------|----------|
+| 7364 | 20  | 900    | 2173.214 |
+| 7494 | 30  | 1700   | 2173.214 |
+| 7522 | 30  | 1350   | 2173.214 |
+| 7567 | 20  | 3075   | 2173.214 |
+| 7652 | 30  | 1350   | 2173.214 |
+| 7699 | 30  | 2950   | 2173.214 |
+| 7783 | 10  | 2550   | 2173.214 |
+| 7789 | 20  | 3100   | 2173.214 |
+| 7838 | 10  | 5100   | 2173.214 |
+| 7845 | 30  | 1600   | 2173.214 |
+| 7877 | 20  | 1200   | 2173.214 |
+| 7901 | 30  | 1050   | 2173.214 |
+| 7903 | 20  | 3100   | 2173.214 |
+| 7935 | 10  | 1400   | 2173.214 |
 
-45. Finding the last five records from the table
+<br/><br/>
+
+## 45. Finding the last five records from the table
 Now, if you want to fetch the last eight records from the table then it is always difficult to get such data if your table contains huge information. For example, you want to get the last 8 records from the employee table then you can use rownum and a union clause. The rownum is temporary in SQL.
 
 For example,
 
-1
-2
-3
-Select * from Employee A where rownum <=8
-union
-select * from (Select * from Employee A order by rowid desc) where rownum <=8;
+
+>`Select * from Employee A where rownum <=8
+union`
+
+>`Select * from (Select * from Employee A order by rowid desc) where rownum <=8;`
+
 The above SQL query will give you the last eight records from the employee table where rownum is a pseudo column. It indexes the data in an output set.
 
-46. LAG
+## 46. LAG
 The LAG is applied to get data from a prior row. This is an analytical function. For example, the following query gives the salary from the prior row to compute the difference between the salary of the current row and that of the prior row. In this query, the ORDER BY of the LAG function is applied. The default is 1 if you do not define offset. The arbitrary default condition is given if the offset moves past the range of the window. The default is null if you do not define default.
 
-Syntax
-1
-2
-3
-4
-5
-6
-7
-SELECT dtno,
+- Syntax:
+
+>`SELECT dtno,
        eno,
        emname,
        job,
        salary,
        LAG(sal, 1, 0) OVER (PARTITION BY dtno ORDER BY salary) AS salary_prev
-FROM   employee;
-Output
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-DTNO ENO ENAME JOB SAL SAL_PREV
----------- ---------- ---------- --------- ---------- ----------
-10 7931 STEVE CLERK 1300 0
-10 7783 JOHN MANAGER 2450 1300
-10 7834 KING PRESIDENT 5000 2450
-20 7364 ROBIN CLERK 800 0
-20 7876 BRIAN CLERK 1100 800
-20 7567 SHANE MANAGER 2975 1100
-20 7784 SCOTT ANALYST 3000 2975
-20 7908 KANE ANALYST 3000 3000
-30 7900 JAMES CLERK 950 0
-30 7651 CONNER SALESMAN 1250 950
-30 7522 MATTHEW SALESMAN 1250 1250
-30 7843 VIVIAN SALESMAN 1500 1250
-30 7494 ALLEN SALESMAN 1600 1500
-30 7695 GLEN MANAGER 2850 1600
+FROM   employee;`
 
-47. LEAD
+Output
+
+
+| DTNO | ENO  | ENAME   | JOB     | SAL  | SAL_PREV |
+|------|------|---------|---------|------|----------|
+| 10   | 7931 | STEVE   | CLERK   | 1300 | 0        |
+| 10   | 7783 | JOHN    | MANAGER | 2450 | 1300     |
+| 10   | 7834 | KING    | PRESIDENT | 5000 | 2450   |
+| 20   | 7364 | ROBIN   | CLERK   | 800  | 0        |
+| 20   | 7876 | BRIAN   | CLERK   | 1100 | 800      |
+| 20   | 7567 | SHANE   | MANAGER | 2975 | 1100     |
+| 20   | 7784 | SCOTT   | ANALYST | 3000 | 2975     |
+| 20   | 7908 | KANE    | ANALYST | 3000 | 3000     |
+| 30   | 7900 | JAMES   | CLERK   | 950  | 0        |
+| 30   | 7651 | CONNER  | SALESMAN | 1250 | 950      |
+| 30   | 7522 | MATTHEW | SALESMAN | 1250 | 1250     |
+| 30   | 7843 | VIVIAN  | SALESMAN | 1500 | 1250     |
+| 30   | 7494 | ALLEN   | SALESMAN | 1600 | 1500     |
+| 30   | 7695 | GLEN    | MANAGER | 2850 | 1600     |
+
+
+<br/><br/>
+
+## 47. LEAD
 The LEAD is also an analytical query that is applied to get data from rows extra down the output set. The following query gives the salary from the next row to compute the deviation between the salary of the prevailing row and the subsequent row. The default is 1 if you do not define offset. The arbitrary default condition is given if the offset moves past the range of the window. The default is null if you do not define default.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-SELECT eno,
+
+>`SELECT eno,
        empname,
        job,
        salary,
        LEAD(salary, 1, 0) OVER (ORDER BY salary) AS salary_next,
        LEAD(salary, 1, 0) OVER (ORDER BY salary) - salary AS salary_diff
-FROM   employee;
+FROM   employee;`
  
-ENO EMPNAME JOB SALARY SALARY_NEXT SALARY_DIFF
----------- ---------- --------- ---------- ---------- ----------
-7369 STEVE CLERK 800 950 150
-7900 JEFF CLERK 950 1100 150
-7876 ADAMS CLERK 1100 1250 150
-7521 JOHN SALESMAN 1250 1250 0
-7654 MARK SALESMAN 1250 1300 50
-7934 TANTO CLERK 1300 1500 200
-7844 MATT SALESMAN 1500 1600 100
-7499 ALEX SALESMAN 1600 2450 850
-7782 BOON MANAGER 2450 2850 400
-7698 BLAKE MANAGER 2850 2975 125
-7566 JONES MANAGER 2975 3000 25
-7788 SCOTT ANALYST 3000 3000 0
-7902 FORD ANALYST 3000 5000 2000
-7839 KING PRESIDENT 5000 0 -5000
 
-48. PERCENT_RANK
+| ENO  | EMPNAME | JOB      | SALARY | SALARY_NEXT | SALARY_DIFF |
+|------|---------|----------|--------|-------------|-------------|
+| 7369 | STEVE   | CLERK    | 800    | 950         | 150         |
+| 7900 | JEFF    | CLERK    | 950    | 1100        | 150         |
+| 7876 | ADAMS   | CLERK    | 1100   | 1250        | 150         |
+| 7521 | JOHN    | SALESMAN | 1250   | 1250        | 0           |
+| 7654 | MARK    | SALESMAN | 1250   | 1300        | 50          |
+| 7934 | TANTO   | CLERK    | 1300   | 1500        | 200         |
+| 7844 | MATT    | SALESMAN | 1500   | 1600        | 100         |
+| 7499 | ALEX    | SALESMAN | 1600   | 2450        | 850         |
+| 7782 | BOON    | MANAGER  | 2450   | 2850        | 400         |
+| 7698 | BLAKE   | MANAGER  | 2850   | 2975        | 125         |
+| 7566 | JONES   | MANAGER  | 2975   | 3000        | 25          |
+| 7788 | SCOTT   | ANALYST  | 3000   | 3000        | 0           |
+| 7902 | FORD    | ANALYST  | 3000   | 5000        | 2000        |
+| 7839 | KING    | PRESIDENT | 5000   | 0           | -5000       |
+
+
+## 48. PERCENT_RANK
 The PERCENT_RANK analytic query. The ORDER BY clause is necessary for this query. Excluding a partitioning clause from the OVER clause determines the entire output set is interpreted as a separate partition. The first row of the standardized set is indicated 0 and the last row of the set is indicated 1. For example, the SQL query example gives the following output.
 
-Syntax
-1
-2
-3
-4
-5
-6
-SELECT
+- Syntax:
+
+>`SELECT
      prdid, SUM(amount),
      PERCENT_RANK() OVER (ORDER BY SUM(amount) DESC) AS percent_rank
      FROM sales
      GROUP BY prdid
-     ORDER BY prdid;
+     ORDER BY prdid;`
+
 Output
-1
-2
-3
-4
+
 PRDID        SUM(AMOUNT)  PERCENT_RANK
 ----------- ----------- ------------
           1    22623.5            0
           2   223927.08           1
 
-49. MIN
+## 49. MIN
 Utilizing a blank OVER clause converts the MIN into an analytic function. This is also an analytical query. In this, the entire result set is interpreted as a single partition. It gives you the minimum salary for all employees and their original data. For example, the following query is displaying the use of MIN in the Select query.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-SELECT eno,
+
+>`SELECT eno,
        empname,
        dtno,
        salary,
        MIN(salary) OVER (PARTITION BY dtno) AS min_result
-FROM   employee;
+FROM   employee;`
  
      ENO   EMPNAME          DTNO     SALARY MIN_RESULT
 ---------- ---------- ---------- ---------- ---------------
@@ -725,38 +622,15 @@ FROM   employee;
       7698 BLAKE              30       2850             950
       7654 MARTIN             30       1250             950
 
-50. MAX
+## 50. MAX
 Using a blank row OVER clause converts the MAX into an analytic function. The lack of a partitioning clause indicates the entire output set is interpreted as a separate partition. This gives the maximum salary for all employees and their original data. For example, the following query displays the use of MAX in the select query.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-SELECT eno,
+>`SELECT eno,
        empname,
        dtno,
        salary,
        MAX(salary) OVER () AS max_result
-FROM   employee;
+FROM   employee;`
  
      ENO   EMPNAME          DTNO       SALARY    MAX_RESULT
 ---------- ---------- ---------- ---------- ----------
@@ -775,45 +649,14 @@ FROM   employee;
       7902 FORD               20       3000       3000
       7934 MILLER             10       1300       3000
 
-51. Top- N queries
+## 51. Top- N queries
 Top-N queries give a process for restricting the number of rows delivered from organized assemblages of data. They are remarkably beneficial when users want to give the top or bottom number of rows from a table.
 
 For example, the following query gives the 20 rows with 10 different values:
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-SELECT price
+>`SELECT price
 FROM   sales_order
-ORDER BY price;
+ORDER BY price;`
  
 PRICE
 ----------
@@ -972,7 +815,9 @@ SELECT eno,
 FROM   employee;
 The above query will ignore null values.
 
-58. LAST_VALUE
+<br/><br/>
+
+## 58. LAST_VALUE
 The primary explanation for the LAST_VALUE analytic query or function is displayed below.
 
 1
@@ -998,7 +843,9 @@ SELECT eno,
          OVER (PARTITION BY dno ORDER BY salary) AS highest_salary_in_dept
 FROM   employee;
 
-59. Prediction
+<br/><br/>
+
+## 59. Prediction
 The design sample foretells the gender and age of clients who are most expected to adopt an agreement card (target = 1). The PREDICTION function takes the price matrix correlated with the design and applies for marital status, and house size as predictors. The syntax of the PREDICTION function can also apply a piece of arbitrary GROUPING information when getting a partitioned model.
 
 1
@@ -1024,7 +871,9 @@ CUST_GENDER         CNT    AVG_AGE
 F                   270         40
 M                   585         41
 
-60. CLUSTER_SET
+<br/><br/>
+
+## 60. CLUSTER_SET
 CLUSTER_SET can get the data in one of the couple steps: It can use a mining type object to the information, or it can mine the data by performing an analytic clause that creates and uses one or more moving mining patterns.
 
 This example enumerates the properties that have the biggest influence on cluster distribution for client ID 1000. The query requests the CLUSTER_DETAILS and CLUSTER_SET functions, which use the clustering model my_sample.
@@ -1050,25 +899,14 @@ A cluster is a group table that distributes the corresponding data blocks i.e. a
 
 .. and TEN More Advanced SQL Queries for our Users!
 
-61. WITH (Common Table Expressions)
+<br/><br/>
+
+## 61. WITH (Common Table Expressions)
 A common table expression (CTE) is a defined short result set that endures within the range of a particular statement and that can be called later within that statement, perhaps on many occasions. The following query is describing the CTE:
 
 Syntax
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-WITH all_emp
+
+>`WITH all_emp
 AS
 (
 SELECT empId, BossId, FirstName, LastName
@@ -1081,9 +919,11 @@ SELECT e.empId, e.BossId, e.FirstName, e.LastName
 FROM Emp e INNER JOIN all_emp r
 ON e.BossId = r.Id
 )
-SELECT * FROM all_emp
+SELECT * FROM all_emp`
 
-62. NANVL
+<br/><br/>
+
+## 62. NANVL
 This function is utilized to deliver an optional value n1 if the inserted value n2 is NaN (not a number), and gives n2 if n2 is not a number. This function is used only for type BINARY_FLOAT. The following query is displaying its use:
 
 Example
@@ -1091,7 +931,9 @@ Example
 > `SELECT bin_float, NANVL(bin_float,0)
 FROM my_demo_table;`
 
-63. WIDTH_BUCKET
+<br/><br/>
+
+## 63. WIDTH_BUCKET
 This function is used to obtain the bucket number. In this, it gives the value of the expression that would come under after being assessed. The following query is displaying its use:
 
 - Example:
@@ -1102,14 +944,18 @@ FROM emp
 WHERE mgr_id < 300
 ORDER BY "Exists in Dept";`
 
-64. COSH
+<br/><br/>
+
+## 64. COSH
 This function is used to deliver the hyperbolic cosine of a number. It accepts all numeric or non-numeric data types as an argument. The following query is displaying its use:
 
 - Example;
 
 > `SELECT COSH(0) "COSH of 0" FROM DUAL;`
 
-65. SOUNDEX
+<br/><br/>
+
+## 65. SOUNDEX
 The SOUNDEX function delivers a character string comprising the description of char. It allows users to match words that are spelled antagonistically, but sound similar in English. It does not support CLOB. The following query is displaying its use:
 
 Example
@@ -1122,14 +968,18 @@ FROM hr.emp
 WHERE SOUNDEX(last_name)
 = SOUNDEX('SCOTTY');
 
-66. TZ_OFFSET
+<br/><br/>
+
+## 66. TZ_OFFSET
 The TZ_OFFSET gives the time zone offset identical to the case based on the date the statement is given. The following query is displaying its use:
 
 Example
 1
 SELECT TZ_OFFSET('US/Eastern') FROM DUAL;
 
-67. CARDINALITY
+<br/><br/>
+
+## 67. CARDINALITY
 CARDINALITY is utilized to obtain the number of components in a nested table. It is supported in different versions. The following query is displaying its use:
 
 Example
@@ -1138,7 +988,9 @@ Example
 SELECT product_id, CARDINALITY(ad_mydocs_get)
 FROM my_media_table;
 
-68. DUMP
+<br/><br/>
+
+## 68. DUMP
 DUMP is one of the important string/char functions. It is utilized to get a VARCHAR2 value. The value delivered defines the data type code. The following query is displaying its use:
 
 Example
@@ -1147,7 +999,9 @@ Example
 SELECT DUMP('pqr', 1033)
 FROM DUAL;
 
-69. PATH
+<br/><br/>
+
+## 69. PATH
 PATH is applied simply with the UNDER_PATH and EQUALS_PATH requirements. It gives the corresponding path that points to the resource defined in the main state. The following query is displaying its use:
 
 Example
@@ -1156,7 +1010,9 @@ Example
 SELECT ANY_PATH FROM RESOURCE_VIEW
 WHERE EQUALS_PATH(res, '/sys/schemas/OE/www.pqr.com')=3;
 
-70. UNISTR
+<br/><br/>
+
+## 70. UNISTR
 UNISTR accepts an expression that determines character data and delivers it in the general character set. It gives support to the Unicode string literals by allowing users to define the Unicode value. The following query is displaying its use:
 
 Example
@@ -1167,41 +1023,58 @@ SELECT UNISTR('pqr\00e4\00f3\00f9') FROM DUAL;
 Database Queries in SQL
 These are some of the commonly used database queries in SQL.
 
-SELECT – database query used to extract data from a table.
-CREATE DATABASE – database query used to create a new database.
-DROP DATABASE – database query used to delete a database.
-CREATE TABLE – database query used to create a table in the specified database.
-ALTER TABLE – database query used to modify an existing table in the specified database
-DROP TABLE – database query used to delete an existing table in the specified database
-CREATE INDEX – Index creation query.
-CREATE VIEW – View creation query.
-DROP VIEW – View deletion query.
-CREATE PROCEDURE – Procedure creation query.
-CREATE FUNCTION – Function creation query.
-DROP PROCEDURE – Procedure deletion query.
-DROP FUNCTION – Function deletion query.
+`SELECT` – database query used to extract data from a table.
+
+`CREATE DATABASE` – database query used to create a new database.
+
+`DROP DATABASE` – database query used to delete a database.
+
+`CREATE TABLE` – database query used to create a table in the specified database.
+
+`ALTER TABLE` – database query used to modify an existing table in the specified database
+
+`DROP TABLE` – database query used to delete an existing table in the specified database
+
+`CREATE INDEX` – Index creation query.
+
+`CREATE VIEW` – View creation query.
+
+`DROP VIEW` – View deletion query.
+
+`CREATE PROCEDURE` – Procedure creation query.
+
+`CREATE FUNCTION` – Function creation query.
+
+`DROP PROCEDURE` – Procedure deletion query.
+
+`DROP FUNCTION` – Function deletion query.
+
 Example of Query in a Database
 We will be looking at some SELECT examples of a query in a database, as this is the most common command.
 
-SELECT * FROM employeeTable WHERE emp_no = ‘12’;
+>`SELECT * FROM employeeTable WHERE emp_no = ‘12’;`
 
 This query filters out results that do not match a specified search.
 
-SELECT * FROM sys.objects WHERE object_id=object_id(‘<table name>’);
+>`SELECT * FROM sys.objects WHERE object_id=object_id(‘<table name>’);`
 
 This database query will list all the columns of the table whose name matches the argument.
 
 Database Queries Examples
 The following are some database queries examples that deal with creating tables, in a bit more advanced fashion.
 
-Create a table with a primary key called “ID”.
+>`Create a table with a primary key called “ID”.
 CREATE TABLE table_name (
 PRIMARY KEY(column_name)
-);
+);`
+
 Create a table with a non-unique index called “IDX” on column_name.
-CREATE INDEX idx_name ON table_name (column_name);
+>`CREATE INDEX idx_name ON table_name (column_name);`
+
 Create a view with the name “VIEW1” that can be used to query data from table1. The view is created on columns column1 and column2. It must return the same number of rows as the underlying table, and it must return the same data type. In this case, we will return the maximum value for each column in the underlying table when queried against the view. The following query will be used to populate our view:
-CREATE VIEW view1 AS SELECT MAX(column1), MAX(column2) FROM table1;
+
+>`CREATE VIEW view1 AS SELECT MAX(column1), MAX(column2) FROM table1;`
+
 Common Database Queries
 Some more common database queries you will need are:
 
